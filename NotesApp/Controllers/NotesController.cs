@@ -15,7 +15,7 @@ namespace NotesApp.Controllers
             _context = context;
         }
 
-        public IActionResult Notes()
+        public IActionResult Index()
         {
             List<Note> allNotes = _context.Notes.ToList();
             return View(allNotes);
@@ -43,7 +43,7 @@ namespace NotesApp.Controllers
                 _context.Notes.Update(note);
             }
             _context.SaveChanges();
-            return RedirectToAction("Notes");
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteNote(int id)
@@ -54,7 +54,7 @@ namespace NotesApp.Controllers
                 _context.Notes.Remove(noteToDelete);
                 _context.SaveChanges();
             }
-            return RedirectToAction("Notes");
+            return RedirectToAction("Index");
         }
     }
 }

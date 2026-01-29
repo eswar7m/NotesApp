@@ -23,22 +23,26 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Title</th>
             <th>Description</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (Note note in Model)
         {
             <tr>
-                <td>@note.Id</td>
                 <td>@note.Title</td>
                 <td>@note.Description</td>
 				<td>
-                    <a asp-controller="Notes" asp-action="CreateEditNote" asp-route-id="@note.Id">Edit</a>
-                    <a asp-controller="Notes" asp-action="DeleteNote" asp-route-id="@note.Id">Delete</a>
+                    <div class="btn-group  gap-3">
+                        <a asp-controller="Notes" asp-action="CreateEditNote" asp-route-id="@note.Id"
+                           class="btn btn-primary">Edit
+                        </a>
+                        <a asp-controller="Notes" asp-action="DeleteNote" asp-route-id="@note.Id"
+                            class="btn btn-outline-primary">Delete
+                        </a>
+                    </div>
+
                 </td>
 			</tr>
         }
