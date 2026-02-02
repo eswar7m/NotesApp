@@ -1,4 +1,4 @@
-﻿# ASP.NET Core MVC Notes Application
+﻿# Notes Application
 
 ## Overview
 
@@ -35,8 +35,8 @@ The project is intended as a clean starter example for learning or building CRUD
 │
 │── /Notes
 │   ├── Index.cshtml          // Displays all notes in a table
-│   ├── CreateEditNote.cshtml // Create and Edit note view
-│
+│   ├── Upsert.cshtml         // Create and edit note view
+│   ├── Delete.cshtml         // Create Delete note view (readonly)
 ```
 
 ---
@@ -68,8 +68,8 @@ public class Note
 Responsible for managing notes:
 
 * `Index` – Displays all notes in a table
-* `CreateEditNote` – Used to create a new note or edit an existing one
-* `DeleteNote` – Deletes a note
+* `Upsert` – Create a new note or edit an existing one
+* `Delete` – Deletes a note
 
 ---
 
@@ -83,10 +83,14 @@ Responsible for managing notes:
   * Description
   * Actions (Edit / Delete)
 
-### Create/Edit Note View
+### Upsert View
 
-* Reused view for both creating and editing notes
+* View for both creating and editing notes
 * Uses model binding and validation
+
+### Delete View
+
+* View for displaying note, non-editable fields
 
 ---
 

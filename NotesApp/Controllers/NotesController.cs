@@ -21,39 +21,55 @@ namespace NotesApp.Controllers
             return View(allNotes);
         }
 
-        public IActionResult CreateEditNote(int? id)
+        public IActionResult Upsert(int? id, string returnUrl)
         {
             Note? noteToEdit = null;
             if (id != null)
             {
                 noteToEdit = _context.Notes.FirstOrDefault(note => note.Id == id);
             }
+            ViewBag.ReturnUrl = returnUrl;
             return View(noteToEdit);
         }
 
         [HttpPost]
-        public IActionResult CreateEditNote(Note note)
+        public IActionResult Upsert(Note note)
         {
-            if (note.Id == 0)
+            if (ModelState.IsValid)
             {
-                _context.Notes.Add(note);
+                if (note.Id == 0)
+                {
+                    _context.Notes.Add(note);
+                }
+                else
+                {
+                    _context.Notes.Update(note);
+                }
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
-            else
-            {
-                _context.Notes.Update(note);
-            }
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            ViewBag.ReturnUrl = "/";
+            return View();
         }
 
-        public IActionResult DeleteNote(int id)
+        public IActionResult Delete(int? id)
         {
+            if (id == null || id == 0)
+                return NotFound();
             Note? noteToDelete = _context.Notes.FirstOrDefault(note => note.Id == id);
             if (noteToDelete != null)
-            {
-                _context.Notes.Remove(noteToDelete);
-                _context.SaveChanges();
-            }
+                return View(noteToDelete);
+            else
+                return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Note noteToDelete)
+        {
+            if (noteToDelete == null)
+                return NotFound();
+            _context.Notes.Remove(noteToDelete);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

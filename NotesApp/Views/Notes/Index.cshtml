@@ -10,11 +10,8 @@
         <div class="col-6">
 			<h2 class="text-primary">Notes</h2>
         </div>
-        <div class="col-6 d-flex justify-content-center gap-2 h-25">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary d-inline-flex align-items-center gap-1">
-				<i class="bi bi-arrow-left-circle"></i> <span>Back</span>
-            </a>
-            <a asp-controller="Notes" asp-action="CreateEditNote" class="btn btn-primary d-inline-flex align-items-center gap-1">
+        <div class="col-6 text-end">
+            <a asp-controller="Notes" asp-action="Upsert" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">
 				<i class="bi bi-file-earmark-plus"></i> <span>Create new Note</span>
             </a>
         </div>
@@ -34,12 +31,12 @@
                 <td>@note.Title</td>
                 <td>@note.Description</td>
 				<td>
-                    <div class="btn-group  gap-3">
-                        <a asp-controller="Notes" asp-action="CreateEditNote" asp-route-id="@note.Id"
+                    <div class="btn-group d-flex"  gap-3">
+                        <a asp-controller="Notes" asp-action="Upsert" asp-route-id="@note.Id" asp-route-returnUrl="@Context.Request.Path"
                            class="btn btn-primary">Edit
                         </a>
-                        <a asp-controller="Notes" asp-action="DeleteNote" asp-route-id="@note.Id"
-                            class="btn btn-outline-primary">Delete
+                        <a asp-controller="Notes" asp-action="Delete" asp-route-id="@note.Id"
+                            class="btn btn-secondary">Delete
                         </a>
                     </div>
 
