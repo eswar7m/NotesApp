@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = (Model?.Id > 0 ? "Edit" : "Create");
+}
+
+@model Note
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">@(Model?.Id > 0 ? "Edit" : "Create") Note</h2>
+            <hr />
+        </div>
+        <!-- input hidden is required for passing Id (Edit), if primary key name is not 'Id'
+             but it return model state error for 'Id', so only added it for edit view
+        -->
+        @if (Model?.Id > 0)
+        {
+            <input class="form-control" asp-for="Id" hidden />
+        }
+        <div class="mb-3">
+            <label>Title</label>
+            <input class="form-control" asp-for="Title" />
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div class="mb-3">
+            <label>Description</label>
+            <input class="form-control" asp-for="Description" />
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+        <div class="d-flex gap-3">
+            <button class="btn btn-primary" type="submit">@(Model?.Id > 0 ? "Update" : "Submit")</button>
+            <a href="@ViewBag.ReturnUrl" class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+    </div>
+</form>
